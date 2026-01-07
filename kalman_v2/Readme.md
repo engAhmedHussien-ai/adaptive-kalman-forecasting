@@ -54,7 +54,7 @@ The latent state is defined as:
 ![State Vector](figures/state_vector.png)
 
 Where:
-![State Vector](figures/state_vector_a.png)
+![State Vector](figures/state_vector-a.png)
 
 ---
 
