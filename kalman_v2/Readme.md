@@ -51,32 +51,18 @@ This aligns with how Kalman filters are used in control systems, sensor fusion, 
 
 The latent state is defined as:
 
-\[
-x_t =
-\begin{bmatrix}
-p_t \\
-v_t
-\end{bmatrix}
-\]
+![State Vector](figures/state_vector.png)
 
 Where:
-- \(p_t\) is the estimated fair price  
-- \(v_t\) is the estimated short-term velocity  
+![State Vector](figures/state_vector_a.png)
 
 ---
 
 ### State Transition Model (Constant Velocity)
 
 
+![State Vector](figures/state_transition.png)
 
-\[
-x_{t+1} =
-\begin{bmatrix}
-1 & 1 \\
-0 & 1
-\end{bmatrix}
-x_t + w_t
-\]
 
 Design intent:
 - Locally linear approximation
@@ -89,9 +75,7 @@ Velocity is physically bounded to prevent unrealistic behavior.
 
 ### Measurement Model
 
-\[
-z_t = [1 \;\; 0] \, x_t + v_t
-\]
+![Measurement Model](figures/measurement_model.png)
 
 Only the price component is observed.  
 Measurement noise is adapted online using innovation magnitude.
