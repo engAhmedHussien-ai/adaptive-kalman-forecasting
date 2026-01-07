@@ -106,18 +106,6 @@ Although demonstrated on BTC price data, the methodology applies directly to:
 •	Real-time monitoring systems
 The asset is incidental — the estimator is the contribution.
 ________________________________________
-# Repository Structure
-adaptive-kalman-estimator/
-│
-├── kalman.py          # Online estimator & data collection
-├── results.csv        # Logged predictions and observations
-├── analysis.ipynb     # Offline evaluation & metrics
-├── README.md
-└── figures/
-    ├── state_vector.png
-    ├── state_transition.png
-    └── measurement_model.png
-________________________________________
 # Future Work
 Possible extensions include:
 •	Regime-aware switching models
