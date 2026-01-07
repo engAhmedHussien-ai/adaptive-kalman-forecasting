@@ -1,8 +1,8 @@
-# Adaptive Online Kalman Estimator
+## Adaptive Online Kalman Estimator
 Short-Horizon Forecasting under Non-Stationarity
 A disciplined benchmark study of an online adaptive Kalman state-space estimator versus naïve baselines in a noisy, non-stationary time series.
 ________________________________________
-Overview
+# Overview
 This repository implements a real-time adaptive Kalman filter for short-horizon forecasting and evaluates it against simple, widely used baselines.
 The project focuses on estimation quality, not trading signals.
 •	No backtesting
@@ -10,7 +10,7 @@ The project focuses on estimation quality, not trading signals.
 •	No profitability claims
 The system is designed to operate online, under continuously changing noise conditions.
 ________________________________________
-Problem Statement
+# Problem Statement
 Short-horizon forecasting in real systems (financial markets, industrial sensors, energy signals) is dominated by:
 •	Non-stationarity
 •	Noise bursts and regime changes
@@ -18,32 +18,32 @@ Short-horizon forecasting in real systems (financial markets, industrial sensors
 The core question addressed here is:
 Can an adaptive state-space estimator reduce magnitude error and recover faster from disturbances compared to naïve models?
 ________________________________________
-Model Formulation
+# Model Formulation
 The estimator is implemented as a linear state-space model with explicit, interpretable dynamics.
 Equations are rendered as images to ensure consistent display across GitHub themes.
 ________________________________________
-State Vector
+# State Vector
 The latent state is defined as:
-figures/state_vector.png
+![State Vector](figures/state_vector.png)
 Where:
 •	ptp_tpt is the estimated price
 •	vtv_tvt is the estimated short-term velocity
 ________________________________________
-State Transition Model (Constant Velocity)
+# State Transition Model (Constant Velocity)
 The system assumes locally linear dynamics:
-![State Vector](figures/state_vector.png)
+![State Vector](figures/state_transition.png)
 Where:
 •	wtw_twt represents process noise
 •	Velocity is constrained to maintain physical plausibility
 ________________________________________
-Measurement Model
+# Measurement Model
 Only the price component is observed:
-zt=[1    0] xt+vtz_t = [1 \;\; 0] \, x_t + v_tzt=[10]xt+vt 
+![State Vector](figures/measurement_model.png)
 Where:
 •	vtv_tvt represents measurement noise
 •	Measurement noise is adapted online using innovation statistics
 ________________________________________
-Adaptive Noise Handling
+# Adaptive Noise Handling
 To operate under changing conditions:
 •	Measurement noise (R) adapts based on innovation variance
 •	Process noise (Q) adapts slowly to reflect model mismatch
@@ -53,7 +53,7 @@ Key design principles:
 •	Clear separation between estimation and evaluation
 A warm-up phase is enforced to prevent initialization artifacts.
 ________________________________________
-Baseline Models
+# Baseline Models
 The Kalman estimator is benchmarked against:
 •	Persistence (Random Walk)
 p^t+h=pt\hat{p}_{t+h} = p_tp^t+h=pt 
@@ -61,7 +61,7 @@ p^t+h=pt\hat{p}_{t+h} = p_tp^t+h=pt
 •	EMA(20)
 These baselines represent minimal-assumption methods commonly used in practice.
 ________________________________________
-Evaluation Methodology
+# Evaluation Methodology
 Online Walk-Forward Validation
 •	Predictions are generated at time ttt
 •	Validation occurs only after the forecast horizon matures
@@ -77,7 +77,7 @@ For each model and horizon:
 •	Directional Accuracy (sign only)
 No binary “pass/fail” logic is used.
 ________________________________________
-Observed Behavior (Live Runs)
+# Observed Behavior (Live Runs)
 Empirical observations from live execution:
 •	Direction frequently fails for all models during micro-reversals
 •	EMA and persistence remain competitive at very short horizons
@@ -87,7 +87,7 @@ o	Re-anchors faster after volatility disturbances
 o	Exhibits lower lag than exponential smoothing
 These behaviors align with state estimation, not directional prediction.
 ________________________________________
-Limitations
+# Limitations
 This project explicitly does not claim:
 •	Trading profitability
 •	Directional market predictability
@@ -98,7 +98,7 @@ Known constraints:
 •	No nonlinear or asymmetric state modeling
 These limitations are intentional to preserve clarity and interpretability.
 ________________________________________
-Why This Matters Beyond Finance
+# Why This Matters Beyond Finance
 Although demonstrated on BTC price data, the methodology applies directly to:
 •	Industrial sensor estimation
 •	Energy demand smoothing
@@ -107,7 +107,7 @@ Although demonstrated on BTC price data, the methodology applies directly to:
 •	Real-time monitoring systems
 The asset is incidental — the estimator is the contribution.
 ________________________________________
-Repository Structure
+# Repository Structure
 adaptive-kalman-estimator/
 │
 ├── kalman.py          # Online estimator & data collection
@@ -119,14 +119,14 @@ adaptive-kalman-estimator/
     ├── state_transition.png
     └── measurement_model.png
 ________________________________________
-Future Work
+# Future Work
 Possible extensions include:
 •	Regime-aware switching models
 •	Higher-order (acceleration) dynamics
 •	Confidence-weighted directional gating
 •	Application to industrial or energy datasets
 ________________________________________
-Final Note
+# Final Note
 This project is intentionally conservative.
 In a domain dominated by overfitting and narrative bias,
 transparent methodology and honest benchmarking are the result.
