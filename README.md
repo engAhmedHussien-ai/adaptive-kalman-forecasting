@@ -27,12 +27,21 @@ This design aligns with established practice in control systems and sensor fusio
 ## V3 - Forecasting is performed conditionally using estimator confidence; in low-confidence regimes the system explicitly falls back to persistence.
 ---
 
-## Key Difference Between v1 and v2
+## Project Evolution: v1 → v2 → v3
 
-| Aspect | v1 | v2 |
-|------|----|----|
-| Kalman role | Direct predictor | Latent signal estimator |
-| Use of extrapolation | Always | Removed |
-| Baseline handling | Competes with persistence | Defers to persistence |
-| Behavior under noise | Error amplification | Noise suppression |
-| Intended use | Forecasting | Estimation / preprocessing |
+This project evolved through three deliberate stages, each correcting a specific modeling mistake revealed by empirical evidence.
+
+| Version | Core Role of Kalman | Design Choice | Outcome |
+|------|---------------------|---------------|---------|
+| **v1** | Direct predictor | Unconditional short-horizon extrapolation | Persistence outperformed Kalman; noise amplification exposed a model-role mismatch |
+| **v2** | Fair-signal estimator | Removed forecasting; focused on denoising and structure estimation | Significant noise reduction with controlled lag; stable estimator behavior |
+| **v3** | Estimator + gatekeeper | Confidence-gated extrapolation with persistence fallback | Forecasting allowed only when justified; large errors suppressed under chaos |
+
+### Key Lessons
+
+- **Prediction is fragile in high-noise regimes**  
+- **Estimation must precede decision-making**  
+- **Baselines are safeguards, not competitors**  
+- **Confidence-aware systems outperform unconditional intelligence**
+
+Each version was retained intentionally to preserve the learning trail and demonstrate disciplined system design under uncertainty.
