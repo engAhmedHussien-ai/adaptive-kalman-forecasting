@@ -16,7 +16,7 @@ The outcome was expected and highlighted a model-role mismatch rather than an im
 
 ---
 
-## v2 — Fair-Value Estimation Under Noise (Current)
+## v2 — Fair-Value Estimation Under Noise
 
 Version 2 reframes the Kalman filter as a **fair-value estimator**, not a predictor.  
 Instead of extrapolating noisy measurements, Kalman is used to estimate the latent signal and its uncertainty in real time.  
