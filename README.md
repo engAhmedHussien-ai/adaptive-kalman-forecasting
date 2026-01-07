@@ -53,7 +53,9 @@ ________________________________________
 # Baseline Models
 The Kalman estimator is benchmarked against:
 •	Persistence (Random Walk)
-p^t+h=pt\hat{p}_{t+h} = p_tp^t+h=pt 
+
+![State Vector](figures/baseline.png)
+
 •	EMA(10)
 •	EMA(20)
 These baselines represent minimal-assumption methods commonly used in practice.
